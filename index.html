@@ -45,6 +45,22 @@
             box-shadow: 0 15px 20px -5px rgba(242, 153, 74, 0.3), 0 6px 8px -3px rgba(242, 153, 74, 0.1);
             transform: translateY(-5px); /* Keep it slightly elevated */
         }
+        /* Simple spinner for loading state */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2C5F8A;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         /* Smooth scroll behavior */
         html {
             scroll-behavior: smooth;
@@ -367,7 +383,7 @@
                 strengths: ['Clear purpose and target audience.', 'Good visual representation of content breadth.', 'Professional UI design.'],
                 improvements: ['Lacks a compelling, quantifiable "score higher" or "pass rate" statistic.', 'Does not visibly showcase unique interactive elements (e.g., specific quizzes, 3D anatomy tools).', 'Value proposition, while good, isn\'t as direct as competitors in terms of measurable success.'],
                 rating: 3,
-                imageUrl: 'https://github.com/uwskeesari/uwsk/blob/main/images/IMG_1299.png' // Updated path
+                imageUrl: 'images/IMG_1299.png' 
             },
             { 
                 id: 'amboss', name: 'AMBOSS Qbank for Medical Exams', 
@@ -376,7 +392,7 @@
                 strengths: ['Leads with an undeniable, measurable success metric.', 'Clearly shows core Qbank functionality and depth of explanations.', 'Strong credibility established immediately.'],
                 improvements: ['Could potentially showcase more diverse app features beyond the core Qbank (if applicable), but its current focus is highly effective for its niche.'],
                 rating: 5,
-                imageUrl: 'https://github.com/uwskeesari/uwsk/blob/main/images/IMG_1301.png' // Updated path 
+                imageUrl: 'images/IMG_1301.png' 
             },
             {
                 id: 'anki', name: 'Anki Pro: Flashcards Learning',
@@ -385,7 +401,7 @@
                 strengths: ['Clearly articulates the app\'s three core functionalities.', 'Highlights vast content availability.', '"2024 Community Choice" adds valuable social proof.'],
                 improvements: ['Could visually demonstrate the underlying spaced repetition algorithm or progress tracking.', 'Broad appeal might be less targeted than exam-specific apps.'],
                 rating: 3.5,
-                imageUrl: 'images/IMG_1302.png' // Updated path
+                imageUrl: 'images/IMG_1302.png' 
             },
             {
                 id: 'archer', name: 'Archer Review NCLEX',
@@ -394,7 +410,7 @@
                 strengths: ['Powerful, direct, and quantifiable success statistic.', 'Strong social proof ("300K+ students").', 'Clear messaging on convenience and effectiveness.'],
                 improvements: ['Could show more of the actual in-app study content.'],
                 rating: 5,
-                imageUrl: 'IMG_1303.png' // Updated path
+                imageUrl: 'images/IMG_1303.png' 
             },
             {
                 id: 'marrow', name: 'MARROW - for NEET PG & NEXT',
@@ -403,7 +419,7 @@
                 strengths: ['Positions itself as a "Gold standard".', 'Clearly showcases multiple core learning modalities.', 'High rating (18K) provides good social proof.'],
                 improvements: ['Could show progress tracking or performance analytics dashboards.', 'Highlight offline access if available.'],
                 rating: 4,
-                imageUrl: 'images/IMG_1300.png' // Updated path
+                imageUrl: 'images/IMG_1300.png' 
             },
             {
                 id: 'firstaid', name: 'First Aid Cases - USMLE Step 1',
@@ -412,7 +428,7 @@
                 strengths: ['Strong pre-existing brand trust.', 'Clear focus on high-yield, case-based learning.'],
                 improvements: ['Lack of visual interactivity; screenshots are static.', 'Doesn\'t showcase app-specific features like navigation or search.', 'Feels less "app-like" and more "e-book."'],
                 rating: 2,
-                imageUrl: 'images/IMG_1298.png' // Updated path
+                imageUrl: 'images/IMG_1298.png' 
             },
             {
                 id: 'osmosis', name: 'Osmosis: Medical School Notes',
@@ -421,7 +437,7 @@
                 strengths: ['Leverages "Elsevier" brand for trust.', 'Benefit-driven language.', 'Clean and inviting visual design.'],
                 improvements: ['Needs to visually demonstrate how it makes learning "Easier, Faster, Smarter." (e.g. show videos, interactive quizzes).', 'Screenshots are somewhat generic for such a powerful platform.'],
                 rating: 2.5,
-                imageUrl: 'images/IMG_1297.png' // Updated path
+                imageUrl: 'images/IMG_1297.png' 
             },
             {
                 id: 'uworld-new', name: 'UWorld Medical Prep App', 
@@ -430,8 +446,7 @@
                 strengths: ['Directly shows core QBank functionality and high-quality content.', 'Highlights depth of explanations and visual aids.', 'Strong credibility from "Award-winning Explanations".'],
                 improvements: ['Lacks a direct quantifiable success metric (e.g., "score X points higher") on the first screenshot.', 'Could explicitly show progress tracking or analytics features.', 'Could include screenshots for flashcards or videos to showcase full offering.'],
                 rating: 4.5,
-                isOurApp: true, // Mark UWorld as our app
-                imageUrl: 'images/IMG_1304.jpeg' // Updated path
+                imageUrl: 'images/IMG_1304.jpeg' 
             }
         ];
 
@@ -458,8 +473,8 @@
 
         async function callGeminiAPI(prompt) {
             // IMPORTANT: Replace "" with your actual Gemini API Key here if hosting externally.
-            // Example: const apiKey = "YOUR_GEMINI_API_KEY_HERE";
-            const apiKey = ""; 
+            // You can get one from Google AI Studio: https://aistudio.google.com/app/apikey
+            const apiKey = "AIzaSyARfqOA7j0Q1j7pPjywsFv37UGmvqnw0hw"; 
             if (!apiKey) {
                 return "Error: Gemini API Key is missing. Please add your API key to the script.";
             }
