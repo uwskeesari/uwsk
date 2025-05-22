@@ -367,7 +367,7 @@
                 strengths: ['Clear purpose and target audience.', 'Good visual representation of content breadth.', 'Professional UI design.'],
                 improvements: ['Lacks a compelling, quantifiable "score higher" or "pass rate" statistic.', 'Does not visibly showcase unique interactive elements (e.g., specific quizzes, 3D anatomy tools).', 'Value proposition, while good, isn\'t as direct as competitors in terms of measurable success.'],
                 rating: 3,
-                imageUrl: 'uploaded:IMG_1299.png-a794b05e-fe77-4147-b3d1-e2ea89961e61'
+                imageUrl: 'images/IMG_1299.png' // Updated path
             },
             { 
                 id: 'amboss', name: 'AMBOSS Qbank for Medical Exams', 
@@ -376,7 +376,7 @@
                 strengths: ['Leads with an undeniable, measurable success metric.', 'Clearly shows core Qbank functionality and depth of explanations.', 'Strong credibility established immediately.'],
                 improvements: ['Could potentially showcase more diverse app features beyond the core Qbank (if applicable), but its current focus is highly effective for its niche.'],
                 rating: 5,
-                imageUrl: 'uploaded:IMG_1301.png-299dad1a-b51a-40a0-bf48-d952d68c313f'
+                imageUrl: 'images/IMG_1301.png' // Updated path
             },
             {
                 id: 'anki', name: 'Anki Pro: Flashcards Learning',
@@ -385,7 +385,7 @@
                 strengths: ['Clearly articulates the app\'s three core functionalities.', 'Highlights vast content availability.', '"2024 Community Choice" adds valuable social proof.'],
                 improvements: ['Could visually demonstrate the underlying spaced repetition algorithm or progress tracking.', 'Broad appeal might be less targeted than exam-specific apps.'],
                 rating: 3.5,
-                imageUrl: 'uploaded:IMG_1302.png-19b51fef-09d5-426d-b5b0-e88ce709eab6'
+                imageUrl: 'images/IMG_1302.png' // Updated path
             },
             {
                 id: 'archer', name: 'Archer Review NCLEX',
@@ -394,7 +394,7 @@
                 strengths: ['Powerful, direct, and quantifiable success statistic.', 'Strong social proof ("300K+ students").', 'Clear messaging on convenience and effectiveness.'],
                 improvements: ['Could show more of the actual in-app study content.'],
                 rating: 5,
-                imageUrl: 'uploaded:IMG_1303.png-839bd20f-5d3a-4cbb-9c72-4235b380a20e'
+                imageUrl: 'images/IMG_1303.png' // Updated path
             },
             {
                 id: 'marrow', name: 'MARROW - for NEET PG & NEXT',
@@ -403,7 +403,7 @@
                 strengths: ['Positions itself as a "Gold standard".', 'Clearly showcases multiple core learning modalities.', 'High rating (18K) provides good social proof.'],
                 improvements: ['Could show progress tracking or performance analytics dashboards.', 'Highlight offline access if available.'],
                 rating: 4,
-                imageUrl: 'uploaded:IMG_1300.png-f81889a3-f008-4d17-99c3-7e3b3c0aaa5a'
+                imageUrl: 'images/IMG_1300.png' // Updated path
             },
             {
                 id: 'firstaid', name: 'First Aid Cases - USMLE Step 1',
@@ -412,7 +412,7 @@
                 strengths: ['Strong pre-existing brand trust.', 'Clear focus on high-yield, case-based learning.'],
                 improvements: ['Lack of visual interactivity; screenshots are static.', 'Doesn\'t showcase app-specific features like navigation or search.', 'Feels less "app-like" and more "e-book."'],
                 rating: 2,
-                imageUrl: 'uploaded:IMG_1298.png-0c0d4aea-1e05-47ad-965a-f6b48fc4db42'
+                imageUrl: 'images/IMG_1298.png' // Updated path
             },
             {
                 id: 'osmosis', name: 'Osmosis: Medical School Notes',
@@ -421,7 +421,7 @@
                 strengths: ['Leverages "Elsevier" brand for trust.', 'Benefit-driven language.', 'Clean and inviting visual design.'],
                 improvements: ['Needs to visually demonstrate how it makes learning "Easier, Faster, Smarter." (e.g. show videos, interactive quizzes).', 'Screenshots are somewhat generic for such a powerful platform.'],
                 rating: 2.5,
-                imageUrl: 'uploaded:IMG_1297.png-e65fadeb-fde1-4896-9682-5e089822bac8'
+                imageUrl: 'images/IMG_1297.png' // Updated path
             },
             {
                 id: 'uworld-new', name: 'UWorld Medical Prep App', 
@@ -431,7 +431,7 @@
                 improvements: ['Lacks a direct quantifiable success metric (e.g., "score X points higher") on the first screenshot.', 'Could explicitly show progress tracking or analytics features.', 'Could include screenshots for flashcards or videos to showcase full offering.'],
                 rating: 4.5,
                 isOurApp: true, // Mark UWorld as our app
-                imageUrl: 'uploaded:Screenshot 2025-05-21 at 5.49.27 PM.jpg-1a7e61e1-46dc-4d60-883f-f669f2997416'
+                imageUrl: 'images/IMG_1304.jpeg' // Updated path
             }
         ];
 
@@ -457,10 +457,16 @@
         });
 
         async function callGeminiAPI(prompt) {
+            // IMPORTANT: Replace "" with your actual Gemini API Key here if hosting externally.
+            // Example: const apiKey = "YOUR_GEMINI_API_KEY_HERE";
+            const apiKey = ""; 
+            if (!apiKey) {
+                return "Error: Gemini API Key is missing. Please add your API key to the script.";
+            }
+
             const chatHistory = [];
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
             const payload = { contents: chatHistory };
-            const apiKey = ""; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
@@ -479,13 +485,13 @@
                 }
             } catch (error) {
                 console.error("Error calling Gemini API:", error);
-                return "Error: Failed to connect to the AI service.";
+                return "Error: Failed to connect to the AI service. Check your API key and network connection.";
             }
         }
 
         async function generateHeadlineSuggestions(appName, strengths, improvements) {
             const outputDiv = document.getElementById('headline-suggestions-output');
-            outputDiv.innerHTML = '<p class="text-stone-500 text-center py-4">Generating headline suggestions...</p>';
+            outputDiv.innerHTML = '<p class="text-stone-500 text-center py-4">Generating headline suggestions... <span class="spinner"></span></p>';
             const prompt = `As an App Store marketing expert, generate 3-5 compelling and concise headline suggestions for the App Store screenshots of an app called '${appName}'. The app's strengths include: ${strengths.join(', ')}. Areas for improvement in its App Store presence include: ${improvements.join(', ')}. Focus on headlines that drive downloads.`;
             const result = await callGeminiAPI(prompt);
             outputDiv.innerHTML = `
@@ -496,7 +502,7 @@
 
         async function brainstormImprovements(appName, strengths, improvements) {
             const outputDiv = document.getElementById('improvement-ideas-output');
-            outputDiv.innerHTML = '<p class="text-stone-500 text-center py-4">Brainstorming improvement ideas...</p>';
+            outputDiv.innerHTML = '<p class="text-stone-500 text-center py-4">Brainstorming improvement ideas... <span class="spinner"></span></p>';
             const prompt = `As an expert App Store UI/UX designer, brainstorm 3-5 creative and actionable ideas to improve the App Store screenshot strategy and overall presence for an app called '${appName}'. The app's current strengths are: ${strengths.join(', ')}. Current areas for improvement are: ${improvements.join(', ')}. Think beyond just text, consider visual elements, interactive demonstrations, or unique selling points.`;
             const result = await callGeminiAPI(prompt);
             outputDiv.innerHTML = `
@@ -507,7 +513,7 @@
 
         async function generateKeyTakeaways(appName, impression, strengths, improvements) {
             const outputDiv = document.getElementById('key-takeaways-output');
-            outputDiv.innerHTML = '<p class="text-stone-500 text-center py-4">Generating key takeaways...</p>';
+            outputDiv.innerHTML = '<p class="text-stone-500 text-center py-4">Generating key takeaways... <span class="spinner"></span></p>';
             const prompt = `Provide concise, bullet-point key takeaways for the App Store presence of an app called '${appName}'. Include its overall impression, 2-3 main strengths, and 2-3 most critical areas for improvement.
             Overall Impression: ${impression}
             Strengths: ${strengths.join(', ')}
@@ -523,7 +529,7 @@
             appDetailView.innerHTML = `
                 <h3 class="text-2xl font-bold text-teal-700 mb-4">${app.name} ${app.isOurApp ? '<span class="text-base bg-teal-100 text-teal-800 px-3 py-1 rounded-full ml-2">Our App</span>' : ''}</h3>
                 <div class="space-y-5">
-                    ${app.imageUrl ? `<div class="flex justify-center mb-4"><img src="https://content-fetcher.web.app/?id=${app.imageUrl}" alt="${app.name} screenshot" class="rounded-lg shadow-md max-w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/300x500/D1D5DB/4B5563?text=Screenshot+Unavailable';"></div>` : ''}
+                    ${app.imageUrl ? `<div class="flex justify-center mb-4"><img src="${app.imageUrl}" alt="${app.name} screenshot" class="rounded-lg shadow-md max-w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/300x500/D1D5DB/4B5563?text=Screenshot+Unavailable';"></div>` : ''}
                     ${app.imageUrl && app.id === 'uworld-new' ? '<p class="text-sm text-stone-500 text-center mt-2"><i>(Note: This is a composite image showing multiple app screens.)</i></p>' : ''}
                     <div>
                         <h4 class="text-lg font-semibold text-orange-600 mb-1">Overall Impression:</h4>
